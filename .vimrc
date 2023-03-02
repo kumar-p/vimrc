@@ -1,5 +1,21 @@
 set nocompatible
 
+"{{{
+
+" You might have to force true color when using regular vim inside tmux as the
+" colorscheme can appear to be grayscale with "termguicolors" option enabled.
+if !has('gui_running') && &term =~ '^\%(screen\|tmux\)'
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+
+syntax on
+set termguicolors
+colorscheme gruvbox
+set background=dark
+
+"}}}
+
 "{{{ Autocommands
 
 " Remove any trailing whitespace that is in the file
@@ -13,7 +29,6 @@ set showcmd
 " Syntax Highlighting
 filetype on
 filetype plugin on
-syntax enable
 
 " Set Autoindent
 set autoindent
@@ -41,10 +56,3 @@ set incsearch
 " Highlight things that we find with the search
 set hlsearch
 
-"{{{Look and Feel
-
-"Status line gnarliness
-set laststatus=2
-set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]
-
-"}}}
